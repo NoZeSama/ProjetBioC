@@ -11,5 +11,7 @@ Le but de ce projet sera alors de comparer des séquences d’ADN pour détermin
 correspondant à des familles d’organismes.
 Nous avons à notre disposition 20 fichiers contenant chacun une séquence d’ADN.
 Notre travail va alors consister à :
-  • regrouper les séquences par famille en les comparant
-  • trouver la séquence ”consensus” de chaque famille
+
+    • regrouper les séquences par famille en les comparant
+  
+    • trouver la séquence ”consensus” de chaque famille
