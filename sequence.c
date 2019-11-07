@@ -4,35 +4,36 @@
 #include "sequence.h"
 
 
-SEQUENCE *createSequence(FILE *f) {
-    char buffer[64];
+SEQUENCE *reverse(SEQUENCE *S) {
+    if(!S || !S->next)
+        return S;
+    SEQUENCE *tmp = S->next;
+    SEQUENCE *res = reverse(S->next);
+    tmp->next = S;
+    S->next = NULL;
+    return res;
+}
+
+SEQUENCE *createSequence(FILE *f, SEQUENCE *S) {
+    char buffer[20];
     fgets(buffer, sizeof(buffer), f);
-    SEQUENCE *S, *head, *current = NULL;
-    for(int i = 0; buffer[i] != '\0'; i++) {
-        S = malloc(sizeof(SEQUENCE));
-        S->data = buffer[i];  
-        if(current)
-            current->next = S;
-        else
-            head = S;
-        current = S;
+    SEQUENCE *new;
+    new = NULL;
+    for(int i = 0 ; buffer[i] != '\0'; i++) {
+        new = malloc(sizeof(SEQUENCE));
+        new->data = buffer[i];
+        new->count = i;
+        new->next = S;
+        S = new;
     }
-    return head;
+    return S;
 }
 
 void show(SEQUENCE *S) {
  	if(S) {
- 		printf("%c ", S->data);
+ 		printf("%c", S->data);
+        printf("%d ", S->count);
  		show(S->next);
  	} else
  		printf("\n");
-}
-
-void elements(SEQUENCE *S) {
- 	int n = 0;
- 	while(S) {
- 		n++;
-        S = S->next;
- 	}
- 	printf("There is %d nucleotides in the sequence\n", n);
 }

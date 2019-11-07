@@ -1,5 +1,5 @@
 partie1: main1
-	./main1 seq01.txt seq02.t
+	./main1 seq01.txt seq02.txt seq03.txt seq04.txt seq05.txt
 
 main1: main1.o sequence.o distance.o
 	gcc -Wall -o main1 main1.o sequence.o distance.o
