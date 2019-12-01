@@ -4,36 +4,36 @@
 #include "sequence.h"
 
 
-SEQUENCE *reverse(SEQUENCE *S) {
-    if(!S || !S->next)
-        return S;
-    SEQUENCE *tmp = S->next;
-    SEQUENCE *res = reverse(S->next);
-    tmp->next = S;
-    S->next = NULL;
-    return res;
+char *getFilename() {
+    char *filename;
+    printf("What file do you want to open?\n");
+    scanf("%ms", &filename);
+    return filename;
 }
 
-SEQUENCE *createSequence(FILE *f, SEQUENCE *S) {
-    char buffer[20];
-    fgets(buffer, sizeof(buffer), f);
-    SEQUENCE *new;
-    new = NULL;
-    for(int i = 0 ; buffer[i] != '\0'; i++) {
-        new = malloc(sizeof(SEQUENCE));
-        new->data = buffer[i];
-        new->count = i;
-        new->next = S;
-        S = new;
+
+SEQUENCE readFile(char *filename) {
+    FILE *f;
+    char *tmp;
+    SEQUENCE S;
+    if(!(f = fopen(filename, "r"))) {
+        printf("Cannot open file");
+        exit(1);         
     }
+    fscanf(f, "%m[^\n]", &tmp);
+    fclose(f);
+    S.len = strlen(tmp);
+    S.data = tmp;
     return S;
+} 
+
+
+void show(SEQUENCE S) {
+    printf("Sequence is: \n%s\n", S.data);
 }
 
-void show(SEQUENCE *S) {
- 	if(S) {
- 		printf("%c", S->data);
-        printf("%d ", S->count);
- 		show(S->next);
- 	} else
- 		printf("\n");
+
+void freeSequence(SEQUENCE *S) {
+    free(S->data);
+    S->data = NULL;
 }
