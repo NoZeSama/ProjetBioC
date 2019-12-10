@@ -14,6 +14,11 @@ distance.o: distance.c distance.h
 	gcc -Wall -c -g distance.c distance.h
 
 
+leaks: main1
+	valgrind --leak-check=full --show-leak-kinds=all ./main1
+
+
+
 clean:
 	rm -rf *.o
 	rm -rf main1

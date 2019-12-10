@@ -11,10 +11,14 @@ int main() {
     show(S1);
     show(S2);
     DISTANCE D1 = hammingDistance(S1, S2);
-    DISTANCE D2 = levenshteinDistance(S2, S1);
+    DISTANCE D2 = levenshteinDistance(S1, S2);
+    DISTANCE D3 = levenshteinDistance(S2, S1);
     printf("Distance d'édition (Hamming) = %.1f\n", D1.dist);
     printf("Distance d'édition (Levenshtein) = %.1f\n", D2.dist);
+    printf("Distance d'édition (Levenshtein) = %.1f\n", D3.dist);
     freeSequence(&S1);
     freeSequence(&S2);
+    free(filename1);
+    free(filename2);
 	return 0;
 }
